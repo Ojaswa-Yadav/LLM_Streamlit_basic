@@ -9,7 +9,7 @@ st.title("🤖 Language Model Demo")
 
 @st.cache_resource
 def load_model():
-    return pipeline("text-generation", model="gpt2")
+    return pipeline("text-generation", model="gpt3")
 
 generator = load_model()
 
