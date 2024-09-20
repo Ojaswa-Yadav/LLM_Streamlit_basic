@@ -8,3 +8,4 @@ xformers==0.0.21
 bitsandbytes==0.41.1
 sentence_transformers==2.2.2
 chromadb==0.4.12
+torch==2.0.1+cpu  
