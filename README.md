@@ -1,10 +1,11 @@
-# GPT-3 Style Language Model Demo
+# Advanced Language Model Demo
 
-This Streamlit app demonstrates the capabilities of a GPT-3 style language model using the Llama 2 architecture. Users can input prompts and receive AI-generated responses without the need for an API key.
+This Streamlit app showcases the capabilities of the BART (Bidirectional and Auto-Regressive Transformers) large model, specifically the "facebook/bart-large-cnn" variant. Users can input prompts and receive AI-generated responses, demonstrating advanced natural language processing capabilities.
 
 ## Features
 
 - Interactive web interface for text generation
-- Uses a quantized version of the Llama 2 model (7B parameters)
+- Utilizes the BART-large-CNN model, which excels in summarization and various text generation tasks
 - No API key required
-- Responses generated in real-time
+- Real-time response generation
+- Informative sidebar with usage tips
