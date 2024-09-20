@@ -8,4 +8,4 @@ einops==0.6.1
 sentence_transformers==2.3.0
 chromadb==0.4.12
 Pillow==10.0.0
-tokenizers==0.13.3
+tokenizers==0.14.1
