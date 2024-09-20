@@ -6,9 +6,13 @@ openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
 
 # Function to generate responses
 def generate_response(input_text):
-    llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-    response = llm(input_text)
-    st.info(response)
+    try:
+        llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
+        response = llm(input_text)
+        st.info(response)
+    except Exception as e:
+        st.error(f"An error occurred: {str(e)}")
+        st.error("Please check your OpenAI API key and ensure you have available credits.")
 
 # Text area for user input
 input_text = st.text_area("Enter your prompt here:")
