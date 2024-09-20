@@ -32,8 +32,7 @@ if st.button("Generate Response"):
     else:
         st.warning("Please enter a prompt.")
 
-# Add a footnote
-st.caption("This demo uses the BART-large-CNN model. It's more advanced than GPT-2 and can handle a variety of text generation tasks.")
+
 
 # Add some usage tips
 st.sidebar.header("Usage Tips")
