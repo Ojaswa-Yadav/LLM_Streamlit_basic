@@ -1,29 +1,23 @@
 import streamlit as st
-from ctransformers import AutoModelForCausalLM
+from transformers import pipeline
 
 # Set page configuration
-st.set_page_config(page_title="GPT-3 Style Demo", page_icon="🤖")
+st.set_page_config(page_title="Advanced LLM Demo", page_icon="🚀")
 
 # Add a title
-st.title("🤖 GPT-3 Style Language Model Demo")
+st.title("🚀 Advanced Language Model Demo")
 
 @st.cache_resource
 def load_model():
-    return AutoModelForCausalLM.from_pretrained(
-        "TheBloke/Llama-2-7B-Chat-GGML",
-        model_file="llama-2-7b-chat.ggmlv3.q4_0.bin",
-        model_type="llama",
-        max_new_tokens=256,
-        temperature=0.7
-    )
+    return pipeline("text2text-generation", model="facebook/bart-large-cnn")
 
-llm = load_model()
+generator = load_model()
 
 # Function to generate responses
 def generate_response(input_text):
     try:
-        response = llm(input_text)
-        st.info(response)
+        response = generator(input_text, max_length=150, num_return_sequences=1)
+        st.info(response[0]['generated_text'])
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
 
@@ -39,4 +33,13 @@ if st.button("Generate Response"):
         st.warning("Please enter a prompt.")
 
 # Add a footnote
-st.caption("This is a demo application using a GPT-3 style model (Llama 2). Responses may vary in quality and appropriateness.")
+st.caption("This demo uses the BART-large-CNN model. It's more advanced than GPT-2 and can handle a variety of text generation tasks.")
+
+# Add some usage tips
+st.sidebar.header("Usage Tips")
+st.sidebar.write("""
+- For best results, provide clear and detailed prompts.
+- The model is particularly good at summarization and rephrasing.
+- Try asking it to explain concepts or generate short articles.
+- Remember, while advanced, it may still produce unexpected results.
+""")
