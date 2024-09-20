@@ -1,5 +1,5 @@
 import streamlit as st
-from langchain.llms import OpenAI
+from langchain_openai import OpenAI
 
 # Add your OpenAI API Key
 openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
