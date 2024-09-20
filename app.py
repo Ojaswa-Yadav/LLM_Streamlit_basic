@@ -1,28 +1,36 @@
 import streamlit as st
-from langchain_openai import OpenAI
+from transformers import pipeline
 
-# Add your OpenAI API Key
-openai_api_key = st.sidebar.text_input("OpenAI API Key", type="password")
+# Set page configuration
+st.set_page_config(page_title="LLM Demo", page_icon="🤖")
+
+# Add a title
+st.title("🤖 Language Model Demo")
+
+@st.cache_resource
+def load_model():
+    return pipeline("text-generation", model="gpt2")
+
+generator = load_model()
 
 # Function to generate responses
 def generate_response(input_text):
     try:
-        llm = OpenAI(temperature=0.7, openai_api_key=openai_api_key)
-        response = llm(input_text)
-        st.info(response)
+        response = generator(input_text, max_length=100, num_return_sequences=1)
+        st.info(response[0]['generated_text'])
     except Exception as e:
         st.error(f"An error occurred: {str(e)}")
-        st.error("Please check your OpenAI API key and ensure you have available credits.")
 
 # Text area for user input
-input_text = st.text_area("Enter your prompt here:")
+input_text = st.text_area("Enter your prompt here:", height=100)
 
 # Generate response when button is clicked
 if st.button("Generate Response"):
-    if openai_api_key:
-        if input_text:
+    if input_text:
+        with st.spinner("Generating response..."):
             generate_response(input_text)
-        else:
-            st.warning("Please enter a prompt.")
     else:
-        st.warning("Please enter your OpenAI API Key.")
+        st.warning("Please enter a prompt.")
+
+# Add a footnote
+st.caption("This is a demo application using a public GPT-2 model. Responses may vary in quality and appropriateness.")
